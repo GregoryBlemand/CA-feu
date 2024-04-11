@@ -139,14 +139,14 @@ if ($argc !== 3) {
     exit;
 }
 
-// que ces 2 arguments sont bien des fichiers lisibles
-// que le motif à trouver n'est pas supérieur en taille au plateau à inspecter
 for ($i = 1; $i < $argc; $i++) {
+// que ces 2 arguments sont bien des fichiers lisibles
     if (!is_file($argv[$i])) {
         echo "Erreur : Impossible d'ouvrir le fichier \"$argv[$i]\" n'est pas lisible.\n";
         exit;
     }
 
+    // que le motif à trouver n'est pas supérieur en taille au plateau à inspecter
     if (
         $i == 1
         && (

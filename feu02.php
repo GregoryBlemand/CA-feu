@@ -90,20 +90,23 @@ function evaluateSimpleExpression(string $expression)
                     continue;
                 }
 
+                $firstOp = intval($operands[1]);
+                $secondOp = intval($operands[2]);
+
                 switch ($operator) {
                     case '%':
-                        $subResult = $operands[1] % $operands[2];
+                        $subResult = $firstOp % $secondOp;
                         break;
 
                     case '*':
-                        $subResult = $operands[1] * $operands[2];
+                        $subResult = $firstOp * $secondOp;
                         break;
 
                     case '/':
-                        $subResult = $operands[1] / $operands[2];
+                        $subResult = $firstOp / $secondOp;
                 }
 
-                $expression = str_replace($operands[1].' '.$operator.' '.$operands[2], $subResult, $expression);
+                $expression = str_replace($firstOp.' '.$operator.' '.$secondOp, $subResult, $expression);
                 unset($operators[$k]);
 
             }
@@ -116,17 +119,20 @@ function evaluateSimpleExpression(string $expression)
                 $subResult = 0;
                 preg_match('/([0-9]+) '."\\".$operator.' ([0-9]+)/', $expression, $operands);
 
+                $firstOp = intval($operands[1]);
+                $secondOp = intval($operands[2]);
+
                 switch ($operator) {
                     case '+':
-                        $subResult = $operands[1] + $operands[2];
+                        $subResult = $firstOp + $secondOp;
                         break;
 
                     case '-':
-                        $subResult = $operands[1] - $operands[2];
+                        $subResult = $firstOp - $secondOp;
                         break;
                 }
 
-                $expression = str_replace($operands[1].' '.$operator.' '.$operands[2], $subResult, $expression);
+                $expression = str_replace($firstOp.' '.$operator.' '.$secondOp, $subResult, $expression);
                 unset($operators[$k]);
             }
         }
